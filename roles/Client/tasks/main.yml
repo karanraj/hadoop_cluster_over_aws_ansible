@@ -31,8 +31,8 @@
 
 - name: "Copying apache-hive"
   copy:
-    dest: "/apache-hive"
-    src: "apache-hive"
+    dest: "/"
+    src: "/apache-hive"
 
 - name: "Configuring apache-hive"
   blockinfile:
