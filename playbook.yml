@@ -1,0 +1,26 @@
+- hosts: localhost
+  roles:
+  - role: Instances
+  tasks:
+  - name: Refresing Inverntory
+    meta: "refresh_inventory"
+
+- hosts: tag_Name_namenode
+  roles:
+  - role: NameNode
+
+- hosts: tag_Name_datanode
+  roles:
+  - role: DataNode
+
+- hosts: tag_Name_jobtracker
+  roles:
+  - role: JobTracker
+
+- hosts: tag_Name_tasktracker
+  roles:
+  - role: TaskTracker
+
+- hosts: tag_Name_client
+  roles:
+  - role: Client

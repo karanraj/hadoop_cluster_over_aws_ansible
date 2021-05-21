@@ -1,0 +1,4 @@
+---
+# vars file for Slave
+jobtracker: "{{ groups['tag_Name_jobtracker'][0] }}"
+jobtracker_port_no: "9002"

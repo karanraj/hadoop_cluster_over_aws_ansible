@@ -1,0 +1,9 @@
+---
+# vars file for Instances
+access_key: "Your AWS Access key"
+secret_key: "Your AWS Secret Key"
+ami_id: "AMI-Id"
+sg_group_id: "SecurityGroup-Id"
+ins_type: "Instamce Type"
+key_name: "Key Name"
+subnet_id: "Subnet-Id"

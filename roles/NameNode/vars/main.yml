@@ -1,0 +1,4 @@
+---
+# vars file for Master
+namenode_port_no: "9001"
+namenode_dir: "/name"

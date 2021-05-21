@@ -1,0 +1,6 @@
+---
+# vars file for Slave
+namenode: "{{ groups['tag_Name_namenode'][0] }}"
+namenode_port_no: "9001"
+datanode_dir: "/data"
+

@@ -1,0 +1,7 @@
+---
+# vars file for Slave
+namenode: "{{ groups['tag_Name_namenode'][0] }}"
+namenode_port_no: "9001"
+jobtracker: "{{ groups['tag_Name_jobtracker'][0] }}"
+jobtracker_port_no: "9002"
+

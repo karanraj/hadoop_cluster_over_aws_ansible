@@ -1,0 +1,43 @@
+---
+# tasks file for Master
+
+- name: "Copying Hadoop RPM file"
+  copy:
+     dest: "/home/ec2-user/"
+     src: "/root/software/hadoop-1.2.1-1.x86_64.rpm"
+
+- name: "Copying JDK RPM file"
+  copy:
+     dest: "/home/ec2-user/"
+     src: "/root/software/jdk-8u171-linux-x64.rpm"
+
+- name: "Installing JDK"
+  command:
+     cmd: "rpm -i /home/ec2-user/jdk-8u171-linux-x64.rpm"
+
+- name: "Installing hadoop"
+  command:
+     cmd: "rpm -i /home/ec2-user/hadoop-1.2.1-1.x86_64.rpm --force"
+
+- name: "Creating Namenode directory"
+  file:
+     state: directory
+     path: "{{ namenode_dir }}"
+
+- name: "Configring NameNode's HDFS file"
+  template:
+     dest: "/etc/hadoop/hdfs-site.xml"
+     src: "hdfs-site.xml.j2"
+
+- name: "Configuring NameNode's Core file"
+  template:
+     dest: "/etc/hadoop/core-site.xml"
+     src: "core-site.xml.j2"
+
+- name: "Formating Namenode"
+  shell: echo Y | hadoop  namenode -format
+
+- name: "Starting Namenode"
+  command:
+     cmd: "hadoop-daemon.sh start namenode"
+

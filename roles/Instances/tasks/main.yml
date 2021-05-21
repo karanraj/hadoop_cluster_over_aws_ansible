@@ -1,0 +1,68 @@
+---
+# tasks file for Instances
+- name: "Launching Namenode"
+  ec2_instance:
+    aws_access_key: "{{ access_key }}"
+    aws_secret_key: "{{ secret_key }}"
+    name: "namenode"
+    image_id: "{{ ami_id }}"
+    security_group: "{{ sg_group_id }}"
+    vpc_subnet_id: "{{ subnet_id }}"
+    instance_type: "{{ ins_type }}"
+    key_name: "{{ key_name }}"
+    wait: no
+
+- name: "Launching 3 Data Node"
+  ec2:
+    aws_access_key: "{{ access_key }}"
+    aws_secret_key: "{{ secret_key }}"
+    image: "{{ ami_id }}"
+    wait: no
+    instance_type: "{{ ins_type }}"
+    key_name: "{{ key_name }}"
+    instance_tags:
+      Name: "datanode"
+    vpc_subnet_id: "{{ subnet_id }}"
+    count: 3
+    group_id: "{{ sg_group_id }}"
+    region: "ap-south-1"
+
+- name: "Launching JobTracker"
+  ec2_instance:
+    aws_access_key: "{{ access_key }}"
+    aws_secret_key: "{{ secret_key }}"
+    name: "jobtracker"
+    image_id: "{{ ami_id }}"
+    security_group: "{{ sg_group_id }}"
+    vpc_subnet_id: "{{ subnet_id }}"
+    instance_type: "{{ ins_type }}"
+    key_name: "{{ key_name }}"
+    wait: no
+    
+- name: "Launching 3 TaskTracker"
+  ec2:
+    aws_access_key: "{{ access_key }}"
+    aws_secret_key: "{{ secret_key }}"
+    image: "{{ ami_id }}"
+    wait: no
+    instance_type: "{{ ins_type }}"
+    key_name: "{{ key_name }}"
+    instance_tags:
+      Name: "tasktracker"
+    vpc_subnet_id: "{{ subnet_id }}"
+    count: 3
+    group_id: "{{ sg_group_id }}"
+    region: "ap-south-1"
+
+- name: "Launching Client"
+  ec2_instance:
+    aws_access_key: "{{ access_key }}"
+    aws_secret_key: "{{ secret_key }}"
+    name: "client"
+    image_id: "{{ ami_id }}"
+    security_group: "{{ sg_group_id }}"
+    vpc_subnet_id: "{{ subnet_id }}"
+    instance_type: "{{ ins_type }}"
+    key_name: "{{ key_name }}"
+    wait: yes
+    wait_timeout: 40

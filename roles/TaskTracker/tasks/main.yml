@@ -1,0 +1,30 @@
+---
+# tasks file for Slave
+
+- name: "Copying Hadoop RPM file"
+  copy:
+     dest: "/home/ec2-user/"
+     src: "/root/software/hadoop-1.2.1-1.x86_64.rpm"
+
+- name: "Copying JDK RPM file"
+  copy:
+     dest: "/home/ec2-user/"
+     src: "/root/software/jdk-8u171-linux-x64.rpm"
+
+- name: "Installing JDK"
+  command:
+     cmd: "rpm -i /home/ec2-user/jdk-8u171-linux-x64.rpm"
+
+- name: "Installing hadoop"
+  command:
+     cmd: "rpm -i /home/ec2-user/hadoop-1.2.1-1.x86_64.rpm --force"
+
+- name: "Configuring TaskTracker Mapred file"
+  template:
+     dest: "/etc/hadoop/mapred-site.xml"
+     src: "mapred-site.xml.j2"
+
+- name: "Starting TaskTracker"
+  command:
+     cmd: "hadoop-daemon.sh start tasktracker"
+         
